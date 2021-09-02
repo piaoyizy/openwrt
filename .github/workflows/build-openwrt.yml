@@ -201,7 +201,7 @@ jobs:
       id: push
       run: |
         cd $GITHUB_WORKSPACE/dockerx86
-        sudo wget https://github.com/piaoyizy/openwrt/releases/download/$(date +"%Y-%m-%d"x86)/openwrt-x86-64-generic-rootfs.tar.gz
+        cp $GITHUB_WORKSPACE/openwrt/bin/targets/x86/64/openwrt-x86-64-generic-rootfs.tar.gz $GITHUB_WORKSPACE/dockerx86/
         mv openwrt-x86-64-generic-rootfs.tar.gz openwrt-x86-64-default-rootfs.tar.gz  
         chmod +x $DOCKER_BUILD_SH
         ./$DOCKER_BUILD_SH
