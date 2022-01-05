@@ -10,6 +10,12 @@
 # Description: OpenWrt DIY script part 1 (Before Update feeds)
 #
 
+
+# Add luci-app-unblockneteasemusic
+rm -rf ../lean/luci-app-unblockmusic
+git clone https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic.git
+
+
 # 添加SSR-Plus
 git clone https://github.com/fw876/helloworld.git package/luci-app-ssr-plus
 
