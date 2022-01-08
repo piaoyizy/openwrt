@@ -12,7 +12,7 @@
 
 
 # Add luci-app-unblockneteasemusic
-rm -rf ../lean/luci-app-unblockmusic
+# rm -rf ../lean/luci-app-unblockmusic
 git clone https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic.git /package/unblockneteasemusic
 
 
