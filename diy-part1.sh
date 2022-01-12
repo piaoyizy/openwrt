@@ -28,7 +28,7 @@ git clone https://github.com/xiaorouji/openwrt-passwall.git package/passwall
 git clone -b master https://github.com/vernesong/OpenClash.git package-temp
 rm -rf package/lean/luci-app-openclash
 mv -f package-temp/luci-app-openclash package/lean/
-cat >> .config1 <<EOF
+cat >> .config <<EOF
 CONFIG_PACKAGE_luci-app-openclash=y
 CONFIG_LIBCURL_COOKIES=y
 CONFIG_LIBCURL_FILE=y
