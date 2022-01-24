@@ -12,6 +12,7 @@
 
 
 
+git clone  https://github.com/QiuSimons/openwrt-mos.git package/luci-app-mosdns
 
 
 
