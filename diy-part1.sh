@@ -14,7 +14,7 @@
 
 git clone  https://github.com/QiuSimons/openwrt-mos.git package/luci-app-mosdns
 
-
+sed -i "s/127.0.0.1/127.0.0.1:5335/g"   package/luci-app-mosdns/root/etc/mosdns/set.sh
 
 # 添加SSR-Plus
 git clone https://github.com/fw876/helloworld.git package/luci-app-ssr-plus
