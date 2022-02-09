@@ -26,5 +26,5 @@ sed -i 's/shadowsocksr/passwall/g' package/lean/luci-theme-neobird/luasrc/view/t
  
  
 #'设置默认主题'
-default_theme='neobird'	
+default_theme='edge'	
 sed -i "s/bootstrap/$default_theme/g" feeds/luci/modules/luci-base/root/etc/config/luci
