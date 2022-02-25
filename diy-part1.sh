@@ -27,6 +27,12 @@ rm -rf  package/luci-app-bypass
 git clone https://github.com/garypang13/luci-app-bypass.git package/luci-app-bypass
 
 
+
+git clone https://github.com/pymumu/openwrt-smartdns package/lean/smartdns
+git clone -b lede https://github.com/pymumu/luci-app-smartdns.git package/lean/luci-app-smartdns
+
+
+
 # Add luci-app-openclash
 git clone -b master https://github.com/vernesong/OpenClash.git package-temp
 rm -rf package/lean/luci-app-openclash
