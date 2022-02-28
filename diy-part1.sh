@@ -26,6 +26,8 @@ git clone https://github.com/xiaorouji/openwrt-passwall.git package/passwall
 rm -rf  package/luci-app-bypass
 git clone https://github.com/garypang13/luci-app-bypass.git package/luci-app-bypass
 
+#adguardhome
+git clone https://github.com/limi00/luci-app-adguardhome.git package/luci-app-adguardhome
 
 
 git clone https://github.com/pymumu/openwrt-smartdns package/lean/smartdns
