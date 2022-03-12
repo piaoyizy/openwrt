@@ -20,7 +20,7 @@
 git clone https://github.com/fw876/helloworld.git package/luci-app-ssr-plus
 
 # 添加PassWall
-git clone https://github.com/xiaorouji/openwrt-passwall.git package/luci-app-passwall
+git clone -b luci https://github.com/xiaorouji/openwrt-passwall.git package/luci-app-passwall
 
 # 添加bypass
 rm -rf  package/luci-app-bypass
