@@ -21,8 +21,6 @@ rm -rf package/luci-app-ssr-plus
 git clone https://github.com/fw876/helloworld.git package/luci-app-ssr-plus
 
 
-rm -rf package/luci-app-msd_lite
-git clone  https://github.com/syb999/openwrt-19.07.1/tree/master/package/network/services/msd_lite package/luci-app-msd_lite
 
 
 # 添加PassWall
