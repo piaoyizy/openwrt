@@ -27,5 +27,5 @@ git clone -b 18.06 https://github.com/garypang13/luci-theme-edge.git package/lea
 
 
 #'设置默认主题'
-default_theme='edge'	
+default_theme='Edge'	
 sed -i "s/bootstrap/$default_theme/g" feeds/luci/modules/luci-base/root/etc/config/luci
