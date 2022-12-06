@@ -67,7 +67,7 @@ EOF
 
 
 cd ..
-mv -f msd_lite/ openwrt/package/luci-app-msd_lite
+mv -f msd_lite/ openwrt/package/msd_lite
 
 
 rm -rf package-temp
