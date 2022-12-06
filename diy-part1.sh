@@ -63,4 +63,14 @@ CONFIG_PACKAGE_libncurses=y
 CONFIG_PACKAGE_libreadline=y
 CONFIG_PACKAGE_terminfo=y
 EOF
+
+
+
+cd ..
+mv -f msd_lite/ openwrt/package/luci-app-msd_lite
+
+
 rm -rf package-temp
+
+
+
