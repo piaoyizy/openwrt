@@ -32,6 +32,11 @@ mv -f package/passwall package/luci-app-passwall
 
 
 
+git clone https://github.com/sbwml/luci-app-mosdns package/mosdns
+git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
+
+
+
 #adguardhome
 git clone https://github.com/limi00/luci-app-adguardhome.git package/luci-app-adguardhome
 
