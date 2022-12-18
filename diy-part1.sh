@@ -32,8 +32,8 @@ mv -f package/passwall package/luci-app-passwall
 
 
 
-git clone https://github.com/sbwml/luci-app-mosdns package/mosdns
-git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
+git clone https://github.com/QiuSimons/openwrt-mos package/mosdns
+# git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
 
 
 
