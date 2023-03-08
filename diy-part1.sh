@@ -32,17 +32,17 @@ mv -f package/passwall package/luci-app-passwall
 
 
 
-git clone https://github.com/QiuSimons/openwrt-mos package/mosdns
+# git clone https://github.com/QiuSimons/openwrt-mos package/mosdns
 # git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
 
 
 
 #adguardhome
-git clone https://github.com/limi00/luci-app-adguardhome.git package/luci-app-adguardhome
+# git clone https://github.com/limi00/luci-app-adguardhome.git package/luci-app-adguardhome
 
 
-git clone https://github.com/pymumu/openwrt-smartdns package/lean/smartdns
-git clone -b lede https://github.com/pymumu/luci-app-smartdns.git package/lean/luci-app-smartdns
+# git clone https://github.com/pymumu/openwrt-smartdns package/lean/smartdns
+# git clone -b lede https://github.com/pymumu/luci-app-smartdns.git package/lean/luci-app-smartdns
 
 
 
