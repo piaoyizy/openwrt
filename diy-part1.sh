@@ -45,9 +45,9 @@ mv -f package/passwall package/luci-app-passwall
 # git clone -b lede https://github.com/pymumu/luci-app-smartdns.git package/lean/luci-app-smartdns
 
 
-git clone -b master https://github.com/vernesong/OpenClash.git package-temp
-rm -rf package/lean/luci-app-openclash
-mv -f package-temp/luci-app-openclash package/lean/
+# git clone -b master https://github.com/vernesong/OpenClash.git package-temp
+# rm -rf package/lean/luci-app-openclash
+# mv -f package-temp/luci-app-openclash package/lean/
 
 
 
