@@ -202,6 +202,7 @@ jobs:
       run: |
         cp $GITHUB_WORKSPACE/openwrt/bin/targets/armvirt/64/openwrt-armvirt-64-generic-rootfs.tar.gz $GITHUB_WORKSPACE/dockerx/
         cd $GITHUB_WORKSPACE/dockerx
+        mv openwrt-armvirt-64-generic-rootfs.tar.gz openwrt-armvirt-64-default-rootfs.tar.gz
         chmod +x $DOCKER_BUILD_SH
         ./$DOCKER_BUILD_SH
         gzip -dc docker-img-openwrt-armvirt-latest.gz | docker load
