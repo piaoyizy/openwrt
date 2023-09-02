@@ -10,7 +10,7 @@
 # Description: OpenWrt DIY script part 1 (Before Update feeds)
 #
 
-  apt-get install pigz
+ sudo apt-get install pigz
 
 # git clone  https://github.com/QiuSimons/openwrt-mos.git package/luci-app-mosdns
 
