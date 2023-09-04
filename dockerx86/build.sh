@@ -10,7 +10,7 @@ OUTDIR=/root/dockerx/
 IMG_NAME=piaoyizy/openwrt-x86
 
 [ -d "$TMPDIR" ] && rm -rf "$TMPDIR"
-
+sudo apt-get install pigz
 mkdir -p "$TMPDIR"  && \
 gzip -dc openwrt-x86-64-default-rootfs.tar.gz | ( cd "$TMPDIR" && tar xf - ) && \
 cp -f patches/rc.local "$TMPDIR/etc/" && \
