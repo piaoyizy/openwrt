@@ -24,11 +24,12 @@ git clone https://github.com/fw876/helloworld.git package/luci-app-ssr-plus
 
 
 # 添加PassWall
-rm -rf package/passwall
+#rm -rf package/passwall
 rm -rf package/luci-app-passwall
-git clone -b luci https://github.com/xiaorouji/openwrt-passwall.git package/luci-app-passwall
-git clone  https://github.com/xiaorouji/openwrt-passwall.git package/passwall
-mv -f package/passwall package/luci-app-passwall
+git clone  https://github.com/xiaorouji/openwrt-passwall.git package/luci-app-passwall
+# git clone -b luci https://github.com/xiaorouji/openwrt-passwall.git package/luci-app-passwall
+# git clone  https://github.com/xiaorouji/openwrt-passwall.git package/passwall
+# mv -f package/passwall package/luci-app-passwall
 
 
 
