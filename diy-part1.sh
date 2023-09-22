@@ -30,9 +30,12 @@ git clone  https://github.com/xiaorouji/openwrt-passwall.git package/luci-app-pa
 cd package/luci-app-passwall
 mv luci-app-passwall/* .
 cd ../..
+
+ 
+
 # git clone -b luci https://github.com/xiaorouji/openwrt-passwall.git package/luci-app-passwall
-# git clone  https://github.com/xiaorouji/openwrt-passwall.git package/passwall
-# mv -f package/passwall package/luci-app-passwall
+git clone  https://github.com/xiaorouji/openwrt-passwall-packages.git  package/passwall
+mv -f package/passwall package/luci-app-passwall
 
 
 
