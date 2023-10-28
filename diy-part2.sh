@@ -18,8 +18,8 @@ sed -i 's/192.168.1.1/10.10.10.6/g' package/base-files/files/bin/config_generate
 # git clone https://github.com/godros/luci-app-godproxy.git package/lean/luci-app-godproxy
 
 
-git clone https://github.com/thinktip/luci-theme-neobird.git package/lean/luci-theme-neobird
-sed -i 's/shadowsocksr/passwall/g' package/lean/luci-theme-neobird/luasrc/view/themes/neobird/header.htm
+# git clone https://github.com/thinktip/luci-theme-neobird.git package/lean/luci-theme-neobird
+# sed -i 's/shadowsocksr/passwall/g' package/lean/luci-theme-neobird/luasrc/view/themes/neobird/header.htm
  
  
  
