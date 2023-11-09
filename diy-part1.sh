@@ -18,7 +18,8 @@
 
 # 添加SSR-Plus
 rm -rf package/luci-app-ssr-plus
-git clone https://github.com/fw876/helloworld.git package/luci-app-ssr-plus
+# git clone https://github.com/fw876/helloworld.git package/luci-app-ssr-plus
+git clone -b main https://github.com/fw876/helloworld.git package/luci-app-ssr-plus
 
 
 
