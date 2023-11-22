@@ -19,46 +19,20 @@
 # 添加SSR-Plus
 rm -rf package/luci-app-ssr-plus
 # git clone https://github.com/fw876/helloworld.git package/luci-app-ssr-plus
-git clone -b main https://github.com/fw876/helloworld.git package/luci-app-ssr-plus
-
-
-
-
+git clone --depth=1 -b main https://github.com/fw876/helloworld package/luci-app-ssr-plus
 # 添加PassWall
 rm -rf package/passwall
 rm -rf package/luci-app-passwall
-git clone  https://github.com/xiaorouji/openwrt-passwall.git package/luci-app-passwall
-cd package/luci-app-passwall
-mv luci-app-passwall/* .
-cd ../..
+git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages package/openwrt-passwall
+svn export https://github.com/xiaorouji/openwrt-passwall/trunk/luci-app-passwall package/luci-app-passwall
+svn export https://github.com/vernesong/OpenClash/trunk/luci-app-openclash package/luci-app-openclash
+git clone --depth=1 https://github.com/ximiTech/luci-app-msd_lite package/luci-app-msd_lite
+git clone --depth=1 https://github.com/ximiTech/msd_lite package/msd_lite
 
- 
+# 修改本地时间格式
+sed -i 's/os.date()/os.date("%a %Y-%m-%d %H:%M:%S")/g' package/lean/autocore/files/*/index.htm
 
-# git clone -b luci https://github.com/xiaorouji/openwrt-passwall.git package/luci-app-passwall
-git clone  https://github.com/xiaorouji/openwrt-passwall-packages.git  package/passwall
-mv -f package/passwall package/luci-app-passwall
-
-
-
-# git clone https://github.com/QiuSimons/openwrt-mos package/mosdns
-# git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
-
-
-
-#adguardhome
-# git clone https://github.com/limi00/luci-app-adguardhome.git package/luci-app-adguardhome
-
-
-# git clone https://github.com/pymumu/openwrt-smartdns package/lean/smartdns
-# git clone -b lede https://github.com/pymumu/luci-app-smartdns.git package/lean/luci-app-smartdns
-
-
-# git clone -b master https://github.com/vernesong/OpenClash.git package-temp
-# rm -rf package/lean/luci-app-openclash
-# mv -f package-temp/luci-app-openclash package/lean/
-svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash package/luci-app-openclash
-
-
-cd ..
-mv -f msd_lite/ openwrt/package/msd_lite
-rm -rf package-temp
+# 修改版本为编译日期
+date_version=$(date +"%y.%m.%d")
+orig_version=$(cat "package/lean/default-settings/files/zzz-default-settings" | grep DISTRIB_REVISION= | awk -F "'" '{print $2}')
+sed -i "s/${orig_version}/R${date_version} by Haiibo/g" package/lean/default-settings/files/zzz-default-settings
