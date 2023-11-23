@@ -6,7 +6,7 @@ if [ ! -z "$1" ];then
 fi
 
 TMPDIR=openwrt_rootfs
-OUTDIR=/root/dockerx86/
+OUTDIR=/root/dockerx/
 IMG_NAME=piaoyizy/openwrt-aarch64
 
 [ -d "$TMPDIR" ] && rm -rf "$TMPDIR"
