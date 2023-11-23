@@ -6,7 +6,7 @@ if [ ! -z "$1" ];then
 fi
 
 TMPDIR=openwrt_rootfs
-OUTDIR=/dockerimgs
+OUTDIR=/root/dockerx86/
 IMG_NAME=piaoyizy/openwrt-aarch64
 
 [ -d "$TMPDIR" ] && rm -rf "$TMPDIR"
@@ -30,4 +30,4 @@ rm -f DockerImg-OpenwrtArm64-${TAG}.gz && \
 docker build -t ${IMG_NAME}:${TAG} . && \
 rm -f  openwrt-armvirt-64-default-rootfs-patched.tar && \
 rm -rf "$TMPDIR" && \
-docker save ${IMG_NAME}:${TAG} | pigz -9 > $OUTDIR/docker-img-openwrt-armvirt-${TAG}.gz
+docker save ${IMG_NAME}:${TAG} | pigz -9 > docker-img-openwrt-armvirt-${TAG}.gz
