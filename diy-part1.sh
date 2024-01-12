@@ -12,6 +12,17 @@
 
  sudo apt-get install pigz
 
+
+# 替换原 svn 命令
+function git_sparse_clone() {
+  branch="$1" rurl="$2" && shift 2
+  git clone --depth=1 -b $branch --single-branch $rurl
+  repo=$(echo $rurl | awk -F '/' '{print $(NF)}')
+  cd $repo && mv -f $@ ../package
+  cd .. && rm -rf $repo
+}
+
+
 # git clone  https://github.com/QiuSimons/openwrt-mos.git package/luci-app-mosdns
 
 # sed -i "s/127.0.0.1/127.0.0.1:5335/g"   package/luci-app-mosdns/root/etc/mosdns/set.sh
@@ -24,8 +35,9 @@ git clone --depth=1 -b main https://github.com/fw876/helloworld package/luci-app
 rm -rf package/passwall
 rm -rf package/luci-app-passwall
 git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages package/openwrt-passwall
-svn export https://github.com/xiaorouji/openwrt-passwall/trunk/luci-app-passwall package/luci-app-passwall
-svn export https://github.com/vernesong/OpenClash/trunk/luci-app-openclash package/luci-app-openclash
+git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall package/luci-app-passwall
+git_sparse_clone master https://github.com/vernesong/OpenClash luci-app-openclash
+
 git clone --depth=1 https://github.com/ximiTech/luci-app-msd_lite package/luci-app-msd_lite
 git clone --depth=1 https://github.com/ximiTech/msd_lite package/msd_lite
 
@@ -38,7 +50,7 @@ orig_version=$(cat "package/lean/default-settings/files/zzz-default-settings" | 
 sed -i "s/${orig_version}/R${date_version} /g" package/lean/default-settings/files/zzz-default-settings
 
 # 在线用户
-svn export https://github.com/haiibo/packages/trunk/luci-app-onliner package/luci-app-onliner
+git_sparse_clone main https://github.com/haiibo/packages luci-app-onliner
 sed -i '$i uci set nlbwmon.@nlbwmon[0].refresh_interval=2s' package/lean/default-settings/files/zzz-default-settings
 sed -i '$i uci commit nlbwmon' package/lean/default-settings/files/zzz-default-settings
 chmod 755 package/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
