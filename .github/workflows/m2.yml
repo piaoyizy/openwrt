@@ -198,17 +198,4 @@ jobs:
         delete_tags: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
-    - name: Build and push docker image
-      id: push
-      run: |
-        cp $GITHUB_WORKSPACE/openwrt/bin/targets/armvirt/64/openwrt-armvirt-64-generic-rootfs.tar.gz $GITHUB_WORKSPACE/dockerx/
-        cd $GITHUB_WORKSPACE/dockerx
-        mv openwrt-armvirt-64-generic-rootfs.tar.gz openwrt-armvirt-64-default-rootfs.tar.gz
-        chmod +x $DOCKER_BUILD_SH
-        ./$DOCKER_BUILD_SH
-        gzip -dc docker-img-openwrt-armvirt-latest.gz | docker load
-        docker login --username=${{ secrets.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD }}
-        docker tag piaoyizy/openwrt-aarch64 piaoyizy/openwrt-aarch64:R${{ env.DATE_YMD }}
-        docker push piaoyizy/openwrt-aarch64
-        echo "::set-output name=status::success"
+
