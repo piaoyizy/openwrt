@@ -31,7 +31,7 @@ function git_sparse_clone() {
 # 添加SSR-Plus
 rm -rf package/luci-app-ssr-plus
 # git clone https://github.com/fw876/helloworld.git package/luci-app-ssr-plus
-git clone --depth=1 -b main https://github.com/fw876/helloworld package/luci-app-ssr-plus
+git clone --depth=1 -b master https://github.com/fw876/helloworld package/luci-app-ssr-plus
 # 添加PassWall
 rm -rf package/passwall
 rm -rf package/luci-app-passwall
