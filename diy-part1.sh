@@ -16,7 +16,7 @@
 # 替换原 svn 命令
 function git_sparse_clone() {
   branch="$1" rurl="$2" && shift 2
-  git clone --depth=1 -b $branch --single-branch $rurl
+  git clone --depth=1 -b $branch --single-branch --filter=blob:none --sparse $repourl
   repo=$(echo $rurl | awk -F '/' '{print $(NF)}')
   cd $repo && mv -f $@ ../package
   cd .. && rm -rf $repo
