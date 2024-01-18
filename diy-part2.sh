@@ -28,7 +28,7 @@ git clone -b 18.06 https://github.com/garypang13/luci-theme-edge.git package/lea
 
 
 #临时解决docker的webui访问问题。
-sed -i -e "s/list listen_https '0.0.0.0:443'/#list listen_https '0.0.0.0:443'/g" -e "s/list listen_https '\[::\]:443'/#list listen_https '\[::\]:443'/g" /etc/config/uhttpd
+sed -i -e "s/list listen_https '0.0.0.0:443'/#list listen_https '0.0.0.0:443'/g" -e "s/list listen_https '\[::\]:443'/#list listen_https '\[::\]:443'/g" feeds/luci/modules/luci-base/root/etc/config/uhttpd
 
 
 #'设置默认主题'
