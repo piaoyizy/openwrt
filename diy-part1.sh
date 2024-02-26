@@ -11,6 +11,7 @@
 #
 
  sudo apt-get install pigz
+ sudo apt-get install clang
 
 
 # 替换原 svn 命令
