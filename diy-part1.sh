@@ -10,8 +10,8 @@
 # Description: OpenWrt DIY script part 1 (Before Update feeds)
 #
 
- sudo apt-get install pigz
- sudo apt-get install clang
+ sudo apt-get -y install pigz
+ sudo apt-get -y install clang
 
 
 # 替换原 svn 命令
