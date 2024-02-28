@@ -10,13 +10,6 @@
 # Description: OpenWrt DIY script part 1 (Before Update feeds)
 #
 
- sudo apt-get -y install pigz
- sudo apt-get -y install clang
- sudo add-apt-repository ppa:ubuntu-toolchain-r/test
- sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa
- sudo apt-get install -y gcc-13
- sudo apt-get install -y g++-13
- sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 60 --slave /usr/bin/g++ g++ /usr/bin/g++-13
 
 # 替换原 svn 命令
 function git_sparse_clone() {
