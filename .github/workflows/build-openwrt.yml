@@ -76,19 +76,7 @@ jobs:
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
 
-    - name: Custom operations
-      run: |
-        cd openwrt
-        rm -rf feeds/packages/net/{xray-core,v2ray-core,v2ray-geodata,sing-box}
-        rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb}
-        rm -rf feeds/luci/applications/luci-app-mosdns
-        rm -rf feeds/luci/applications/luci-app-smartdns
-        rm -rf feeds/packages/net/{alist,adguardhome,mosdns,smartdns}
-        rm -rf feeds/smpackage/luci-app-adguardhome
-        rm -rf feeds/smpackage/luci-app-bypass
-        rm -rf feeds/packages/lang/golang
-        git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
-
+    
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
 
