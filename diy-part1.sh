@@ -22,7 +22,7 @@ function git_sparse_clone() {
   cd .. && rm -rf $repodir
 }
 
-
+git clone -b 18.06 https://github.com/garypang13/luci-theme-edge.git package/lean/luci-theme-edge
 
 # 添加科学
 # git clone --depth=1 -b master https://github.com/fw876/helloworld package/luci-app-ssr-plus
