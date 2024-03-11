@@ -80,7 +80,6 @@ jobs:
       run: |
         cd openwrt
         rm -rf feeds/packages/net/{xray-core,v2ray-core,v2ray-geodata,sing-box}
-        git clone https://github.com/sbwml/openwrt_helloworld package/helloworld
         rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb}
         rm -rf feeds/luci/applications/luci-app-mosdns
         rm -rf feeds/luci/applications/luci-app-smartdns
