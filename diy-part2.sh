@@ -13,17 +13,18 @@
 # Modify default IP
 sed -i 's/192.168.1.1/10.10.10.6/g' package/base-files/files/bin/config_generate
 
-#'godproxy'
-# rm -rf package/lean/luci-app-godproxy
-# git clone https://github.com/godros/luci-app-godproxy.git package/lean/luci-app-godproxy
 
+rm -rf feeds/packages/net/{xray-core,v2ray-core,v2ray-geodata,sing-box}
+rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb}
+rm -rf feeds/luci/applications/luci-app-mosdns
+rm -rf feeds/luci/applications/luci-app-smartdns
+rm -rf feeds/packages/net/{alist,adguardhome,mosdns,smartdns}
+rm -rf feeds/smpackage/luci-app-adguardhome
+rm -rf feeds/smpackage/luci-app-bypass
+rm -rf feeds/packages/lang/golang
+git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
+ 
 
-# git clone https://github.com/thinktip/luci-theme-neobird.git package/lean/luci-theme-neobird
-# sed -i 's/shadowsocksr/passwall/g' package/lean/luci-theme-neobird/luasrc/view/themes/neobird/header.htm
- 
- 
- 
-git clone -b 18.06 https://github.com/garypang13/luci-theme-edge.git package/lean/luci-theme-edge
 
 sed -i 's/list listen_https/# list listen_https/' package/network/services/uhttpd/files/uhttpd.config
 
