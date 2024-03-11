@@ -30,7 +30,7 @@ function git_sparse_clone() {
 # sed -i "s/127.0.0.1/127.0.0.1:5335/g"   package/luci-app-mosdns/root/etc/mosdns/set.sh
 
 # 添加科学
-git clone --depth=1 -b master https://github.com/fw876/helloworld package/luci-app-ssr-plus
+# git clone --depth=1 -b master https://github.com/fw876/helloworld package/luci-app-ssr-plus
 git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages package/openwrt-passwall
 git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall package/luci-app-passwall
 git_sparse_clone master https://github.com/vernesong/OpenClash luci-app-openclash
