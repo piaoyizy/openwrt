@@ -80,9 +80,8 @@ jobs:
       uses: HiGarfield/cachewrtbuild@main
       with:
         ccache: 'false'
-       # mixkey: ${{ env.DEVICE_TARGET }}-${{ env.DEVICE_SUBTARGET }}
-        mixkey: ${{ env.SOURCE_REPO }}-${{ env.REPO_BRANCH }}-${{ env.DEVICE_TARGET }}-${{ env.DEVICE_SUBTARGET }}
-        prefix: ${{ env.OPENWRT_PATH }}
+        mixkey: ${{ env.DEVICE_TARGET }}-${{ env.DEVICE_SUBTARGET }}
+        prefix: ${{ github.workspace }}/openwrt
     
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
