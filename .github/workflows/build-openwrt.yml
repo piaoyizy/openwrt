@@ -76,7 +76,13 @@ jobs:
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
 
-    
+     - name: cache
+      uses: HiGarfield/cachewrtbuild@main
+      with:
+        ccache: 'false'
+        mixkey: ${{ env.DEVICE_TARGET }}-${{ env.DEVICE_SUBTARGET }}
+        prefix: ${{ github.workspace }}/openwrt
+        
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
 
