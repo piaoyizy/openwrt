@@ -37,7 +37,6 @@ env:
 jobs:
   build:
     runs-on: ubuntu-20.04
-
     steps:
     - name: Checkout
       uses: actions/checkout@main
@@ -76,7 +75,7 @@ jobs:
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
 
-     - name: cache
+    - name: cache
       uses: HiGarfield/cachewrtbuild@main
       with:
         ccache: 'false'
