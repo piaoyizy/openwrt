@@ -33,6 +33,7 @@ env:
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
   DOCKER_BUILD_SH: build.sh
+  CACHE_TOOLCHAIN: true
 
 jobs:
   build:
