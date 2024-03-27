@@ -81,7 +81,7 @@ jobs:
         echo "COMMIT_HASH=$COMMIT_HASH" >> $GITHUB_ENV
         echo "COMMIT_HASH=$COMMIT_HASH" >> $GITHUB_OUTPUT
          
-    - name: Generate Variables
+    - name: 生成变量
       id: variable
       run: |
         cp $CONFIG_FILE $OPENWRT_PATH/.config
@@ -126,7 +126,7 @@ jobs:
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
 
-    - name: SSH connection to Actions
+    - name: SSH连接操作
       uses: P3TERX/ssh2actions@v1.0.0
       if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
       env:
@@ -165,7 +165,7 @@ jobs:
         name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: openwrt/bin
 
-    - name: Organize files
+    - name: 组织文件
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
@@ -174,7 +174,7 @@ jobs:
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "::set-output name=status::success"
 
-    - name: Upload firmware directory
+    - name: 上传固件目录
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
