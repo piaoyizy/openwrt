@@ -188,7 +188,7 @@ jobs:
         # echo "::set-output name=release_tag::$(date +"%Y.%m.%d-%H%M"-x86)"
         echo "release_tag=${{ env.TAG_TIME }}" >> $GITHUB_OUTPUT
         touch release.txt
-        echo "OpenWrt_X86_64-版（支持ipv6）" >> release.txt
+        echo "OpenWrt_X86_64版（支持ipv6）" >> release.txt
         echo "默认地址：10.10.10.6" >> release.txt
         echo "默认密码：password" >> release.txt
         echo "status=success" >> $GITHUB_OUTPUT
@@ -199,9 +199,10 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
+        name: ${{ env.FILE_TIME }} -X86_64版
         tag_name: ${{ steps.tag.outputs.release_tag }}
         body_path: release.txt
-        files: ${{ env.FIRMWARE }}/*
+        files: ${{ env.FIRMWARE }}/* 
 
     - name: 清理编译流程
       uses: Mattraks/delete-workflow-runs@main
