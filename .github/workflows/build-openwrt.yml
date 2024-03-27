@@ -188,8 +188,9 @@ jobs:
         # echo "::set-output name=release_tag::$(date +"%Y.%m.%d-%H%M"-x86)"
         echo "release_tag=${{ env.TAG_TIME }}" >> $GITHUB_OUTPUT
         touch release.txt
-        [ $UPLOAD_COWTRANSFER = true ] && echo "🔗 [Cowtransfer](${{ steps.cowtransfer.outputs.url }})" >> release.txt
-        [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
+        echo "OpenWrt_X86_64-版（支持ipv6）" >> release.txt
+        echo "默认地址：10.10.10.6" >> release.txt
+        echo "默认密码：password" >> release.txt
         echo "status=success" >> $GITHUB_OUTPUT
 
     - name: 发布新版固件
