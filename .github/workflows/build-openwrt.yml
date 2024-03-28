@@ -192,9 +192,10 @@ jobs:
         echo "默认地址：10.10.10.6" >> release.txt
         echo "默认密码：password" >> release.txt
         echo "status=success" >> $GITHUB_OUTPUT
+    
 
     - name: 发布新版固件
-      uses: softprops/action-gh-release@v2
+      uses: ncipollo/release-action@v1
       if: steps.tag.outputs.status == 'success' && !cancelled()
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
