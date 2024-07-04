@@ -20,10 +20,10 @@ on:
         default: 'false'
 
 env:
-  REPO_URL: https://github.com/immortalwrt/immortalwrt
-  REPO_BRANCH: openwrt-23.05
+  REPO_URL: https://github.com/King-Of-Knights/openwrt-6.x.git
+  REPO_BRANCH: main
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: imx86.config
+  CONFIG_FILE: m2.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
   UPLOAD_BIN_DIR: false
@@ -182,16 +182,3 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
-    - name: 构造docker镜像
-      id: push
-      run: |
-        cd $GITHUB_WORKSPACE/dockerx86
-        cp $GITHUB_WORKSPACE/openwrt/bin/targets/x86/64/openwrt-x86-64-generic-rootfs.tar.gz $GITHUB_WORKSPACE/dockerx86/
-        mv openwrt-x86-64-generic-rootfs.tar.gz openwrt-x86-64-default-rootfs.tar.gz  
-        chmod +x $DOCKER_BUILD_SH
-        ./$DOCKER_BUILD_SH
-        gzip -dc docker-img-openwrt-x86-latest.gz | docker load
-        docker login --username=${{ secrets.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD }}
-        docker tag piaoyizy/openwrt-x86 piaoyizy/openwrt-x86:R${{ env.DATE_YMD }}
-        docker push piaoyizy/openwrt-x86
-        echo "::set-output name=status::success"
