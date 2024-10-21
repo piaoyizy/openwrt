@@ -26,5 +26,5 @@ sed -i 's/list listen_https/# list listen_https/' package/network/services/uhttp
 
 
 #'设置默认主题'
-default_theme='Edge'	
+default_theme='Argon'	
 sed -i "s/bootstrap/$default_theme/g" feeds/luci/modules/luci-base/root/etc/config/luci
