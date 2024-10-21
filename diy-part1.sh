@@ -23,6 +23,8 @@ function git_sparse_clone() {
 }
 
 git clone https://github.com/garypang13/luci-theme-edge.git package/lean/luci-theme-edge
+git clone https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-argon
+git clone https://github.com/jerrykuku/luci-app-argon-config.git package/luci-app-argon-config
 
 # 添加科学
 sed -i '1i src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
