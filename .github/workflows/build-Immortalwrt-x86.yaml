@@ -26,7 +26,6 @@ env:
   DIY_P1_SH: immortalwrt/diy-part1.sh
   DIY_P2_SH: immortalwrt/diy-part2.sh
   FREE_DISK_SH: immortalwrt/free_disk_space.sh
-  UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: false
   UPLOAD_WETRANSFER: false
@@ -133,13 +132,6 @@ jobs:
     - name: 查看磁盘用量
       if: (!cancelled())
       run: df -hT
-
-    - name: 上传 bin 目录
-      uses: actions/upload-artifact@main
-      if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
-      with:
-        name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
-        path: openwrt/bin
 
     - name: 整理文件
       id: organize
