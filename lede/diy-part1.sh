@@ -35,7 +35,7 @@ sed -i '2i src-git small https://github.com/kenzok8/small' feeds.conf.default
 
 git clone --depth=1 https://github.com/ximiTech/luci-app-msd_lite package/luci-app-msd_lite
 git clone --depth=1 https://github.com/ximiTech/msd_lite package/msd_lite
-
+git clone https://github.com/ophub/luci-app-amlogic.git  package-temp/luci-app-amlogic
 # 修改本地时间格式
 sed -i 's/os.date()/os.date("%a %Y-%m-%d %H:%M:%S")/g' package/lean/autocore/files/*/index.htm
 
