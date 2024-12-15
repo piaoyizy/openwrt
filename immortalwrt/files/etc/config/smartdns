@@ -10,7 +10,7 @@ config smartdns
 	option ipv6_server '0'
 	option seconddns_port '5335'
 	option seconddns_server_group 'fq_dns'
-	option enabled '1'
+	option enabled '0'
 	option cache_size '20000'
 	option rr_ttl '3600'
 	option rr_ttl_min '5'
@@ -25,7 +25,7 @@ config smartdns
 	option log_level 'info'
 	option speed_check_mode 'tcp:80,ping'
 	option old_port '6053'
-	option old_enabled '1'
+	option old_enabled '0'
 	option old_auto_set_dnsmasq '1'
 
 config domain-rule
