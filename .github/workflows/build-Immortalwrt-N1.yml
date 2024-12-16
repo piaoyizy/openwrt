@@ -36,7 +36,7 @@ env:
   UPLOAD_WETRANSFER: false
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
-  DOCKER_BUILD_SH: immortalwrtBulid.sh
+  DOCKER_BUILD_SH: build.sh
   CACHE_TOOLCHAIN: true
   FILES: immortalwrt/files
 
@@ -194,8 +194,8 @@ jobs:
     - name: 构造docker镜像
       id: push
       run: |
-        cp $GITHUB_WORKSPACE/openwrt/bin/targets/armvirt/64/immortalwrt-armsr-armv8-generic-rootfs.tar.gz $GITHUB_WORKSPACE/dockerx/
-        cd $GITHUB_WORKSPACE/dockerx
+        cp $GITHUB_WORKSPACE/openwrt/bin/targets/armvirt/64/immortalwrt-armsr-armv8-generic-rootfs.tar.gz $GITHUB_WORKSPACE/docker/
+        cd $GITHUB_WORKSPACE/docker
         mv immortalwrt-armsr-armv8-generic-rootfs.tar.gz openwrt-armvirt-64-default-rootfs.tar.gz
         chmod +x $DOCKER_BUILD_SH
         ./$DOCKER_BUILD_SH
