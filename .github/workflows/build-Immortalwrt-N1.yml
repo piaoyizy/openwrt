@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build LEDE-N1
+name: Build Immortalwrt-N1
 
 permissions: write-all
 
