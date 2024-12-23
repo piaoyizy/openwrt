@@ -202,5 +202,7 @@ jobs:
         gzip -dc docker-img-openwrt-armvirt-latest.gz | docker load
         docker login --username=${{ secrets.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD }}
         docker tag piaoyizy/openwrt-aarch64 piaoyizy/openwrt-aarch64:R${{ env.DATE_YMD }}
-        docker push piaoyizy/openwrt-aarch64
+        docker buildx build --push --platform linux/arm64/v8
+        # docker push piaoyizy/openwrt-aarch64
+        docker buildx build --platform linux/arm64/v8 -t piaoyizy/openwrt-aarch64 --push .
         echo "status=success" >> $GITHUB_OUTPUT
