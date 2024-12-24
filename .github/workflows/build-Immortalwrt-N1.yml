@@ -192,20 +192,20 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
    
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1  
+      uses: docker/setup-buildx-action@v3 
       
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        
     - name: 构造docker镜像
       id: push
       run: |
         cp $GITHUB_WORKSPACE/openwrt/bin/targets/armsr/armv8/immortalwrt-armsr-armv8-generic-rootfs.tar.gz $GITHUB_WORKSPACE/dockerx/
-        cd $GITHUB_WORKSPACE/dockerx
-        mv immortalwrt-armsr-armv8-generic-rootfs.tar.gz openwrt-armvirt-64-default-rootfs.tar.gz
-        chmod +x $DOCKER_BUILD_SH
-        ./$DOCKER_BUILD_SH
+        cd $GITHUB_WORKSPACE/dockerx && mv immortalwrt-armsr-armv8-generic-rootfs.tar.gz openwrt-armvirt-64-default-rootfs.tar.gz
+        chmod +x $DOCKER_BUILD_SH && ./$DOCKER_BUILD_SH
         gzip -dc docker-img-openwrt-armvirt-latest.gz | docker load
-        docker login --username=${{ secrets.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD }}
         docker tag piaoyizy/openwrt-aarch64 piaoyizy/openwrt-aarch64:R${{ env.DATE_YMD }}
-        # docker buildx build --push --platform linux/arm64/v8
-        # docker push piaoyizy/openwrt-aarch64
         docker buildx build --push --platform linux/arm64/v8 -t piaoyizy/openwrt-aarch64:latest .
-        echo "status=success" >> $GITHUB_OUTPUT
