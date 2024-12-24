@@ -190,7 +190,10 @@ jobs:
         delete_tags: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
+   
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1  
+      
     - name: 构造docker镜像
       id: push
       run: |
@@ -202,7 +205,7 @@ jobs:
         gzip -dc docker-img-openwrt-armvirt-latest.gz | docker load
         docker login --username=${{ secrets.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD }}
         docker tag piaoyizy/openwrt-aarch64 piaoyizy/openwrt-aarch64:R${{ env.DATE_YMD }}
-        docker buildx build --push --platform linux/arm64/v8
-        docker push piaoyizy/openwrt-aarch64
-        # docker buildx build --push --platform linux/arm64/v8 -t piaoyizy/openwrt-aarch64:latest .
+        # docker buildx build --push --platform linux/arm64/v8
+        # docker push piaoyizy/openwrt-aarch64
+        docker buildx build --push --platform linux/arm64/v8 -t piaoyizy/openwrt-aarch64:latest .
         echo "status=success" >> $GITHUB_OUTPUT
