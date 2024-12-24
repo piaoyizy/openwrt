@@ -28,6 +28,6 @@ rm -rf "$TMPDIR/lib/firmware/*" "$TMPDIR/lib/modules/*" && \
 (cd "$TMPDIR" && tar cf ../openwrt-armvirt-64-default-rootfs-patched.tar .) && \
 rm -f DockerImg-OpenwrtArm64-${TAG}.gz && \
 docker build -t ${IMG_NAME}:${TAG} . && \
-rm -f  openwrt-armvirt-64-default-rootfs-patched.tar && \
+# rm -f  openwrt-armvirt-64-default-rootfs-patched.tar && \
 rm -rf "$TMPDIR" && \
 docker save ${IMG_NAME}:${TAG} | pigz -9 > docker-img-openwrt-armvirt-${TAG}.gz
