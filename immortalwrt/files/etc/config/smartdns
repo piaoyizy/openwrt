@@ -1,0 +1,78 @@
+
+config smartdns
+	option server_name 'smartdns'
+	option dualstack_ip_selection '1'
+	option prefetch_domain '1'
+	option serve_expired '1'
+	option tcp_server '0'
+	option seconddns_tcp_server '0'
+	option port '6053'
+	option ipv6_server '0'
+	option seconddns_port '5335'
+	option seconddns_server_group 'fq_dns'
+	option enabled '0'
+	option cache_size '20000'
+	option rr_ttl '3600'
+	option rr_ttl_min '5'
+	option auto_set_dnsmasq '1'
+	option tls_server '0'
+	option doh_server '0'
+	option bind_device '1'
+	option cache_persist '1'
+	option resolve_local_hostnames '1'
+	option force_https_soa '1'
+	option log_output_mode 'file'
+	option log_level 'info'
+	option speed_check_mode 'tcp:80,ping'
+	option old_port '6053'
+	option old_enabled '0'
+	option old_auto_set_dnsmasq '1'
+
+config domain-rule
+
+config client-rule
+	option enabled '0'
+	option dualstack_ip_selection '1'
+	option force_https_soa '1'
+
+config ip-rule
+
+config server
+	option enabled '1'
+	option name 'china'
+	option ip '58.240.57.33'
+	option type 'udp'
+	option server_group 'china'
+	option port '53'
+
+config server
+	option enabled '1'
+	option name 'china'
+	option ip '221.6.4.66'
+	option type 'udp'
+	option server_group 'china'
+	option port '53'
+
+config server
+	option enabled '1'
+	option name 'china'
+	option ip '114.114.114.114'
+	option type 'udp'
+	option server_group 'china'
+	option port '53'
+
+config server
+	option enabled '1'
+	option name 'china'
+	option ip '223.5.5.5'
+	option type 'udp'
+	option server_group 'china'
+	option port '53'
+
+config server
+	option enabled '1'
+	option name 'china'
+	option ip '119.29.29.29'
+	option type 'udp'
+	option server_group 'china'
+	option port '53'
