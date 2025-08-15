@@ -104,9 +104,11 @@ jobs:
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x $DIY_P2_SH
         chmod +x $DIY_ZNM2P2_SH
+        chmod +x $DIY_P1_SH    
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
         $GITHUB_WORKSPACE/$DIY_ZNM2P2_SH
+        $GITHUB_WORKSPACE/$DIY_P1_SH
 
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0
