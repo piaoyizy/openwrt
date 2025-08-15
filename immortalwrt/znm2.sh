@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PKG_PATH="$GITHUB_WORKSPACE/wrt/package/"
+PKG_PATH="$GITHUB_WORKSPACE/openwrt/package/"
 
 #预置HomeProxy数据
 if [ -d *"homeproxy"* ]; then
