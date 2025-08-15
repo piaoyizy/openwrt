@@ -8,7 +8,7 @@
 # https://github.com/P3TERX/Actions-OpenWrt
 # Description: Build OpenWrt using GitHub Actions
 #
-name: Build Immortalwrt-X86
+name: Build Immortalwrt-ipq6000
 
 on:
   workflow_dispatch:
