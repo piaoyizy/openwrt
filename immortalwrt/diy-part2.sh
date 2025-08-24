@@ -24,6 +24,8 @@ rm -rf package/feeds/luci/luci-app-passwall/
 rm -rf feeds/packages/net/{xray-core,v2ray-core,v2ray-geodata,sing-box,chinadns-ng}
 git clone https://github.com/xiaorouji/openwrt-passwall-packages.git package/openwrt-passwall
 git clone https://github.com/xiaorouji/openwrt-passwall.git package/passwall
+git clone https://github.com/nikkinikki-org/OpenWrt-momo.git package/OpenWrt-momo
+
 
 rm -rf package/luci-app-amlogic
 git clone https://github.com/ophub/luci-app-amlogic.git package/luci-app-amlogic
