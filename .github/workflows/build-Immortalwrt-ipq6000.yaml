@@ -25,7 +25,7 @@ env:
   REPO_BRANCH: main
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: immortalwrt/znm2.config
-  DIY_P1_SH: immortalwrt/znm2.sh
+  DIY_P1_SH: immortalwrt/diy-part1.sh
   DIY_ZNM2P2_SH: immortalwrt/znm2-Settings.sh
   DIY_P2_SH: immortalwrt/diy-part2.sh
   FREE_DISK_SH: immortalwrt/free_disk_space.sh
