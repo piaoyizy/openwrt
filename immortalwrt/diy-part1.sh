@@ -9,4 +9,4 @@
 # File name: diy-part1.sh
 # Description: OpenWrt DIY script part 1 (Before Update feeds)
 #
-git apply fix-zn-m2-naming.patch
+git apply immortalwrt/fix-zn-m2-naming.patch
