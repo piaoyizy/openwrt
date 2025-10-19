@@ -164,14 +164,15 @@ jobs:
         rm -rf *.manifest
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "status=success" >> $GITHUB_OUTPUT
-
+        
     - name: 上传固件目录
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        # 确保上传的文件名没有非法字符
+        name: "OpenWrt_firmware_${{ env.DEVICE_NAME }}_${{ env.FILE_DATE }}"
         path: ${{ env.FIRMWARE }}
-
+        
     - name: 创建发布标签
       id: tag
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
