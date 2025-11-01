@@ -1,0 +1,208 @@
+
+#
+# Copyright (c) 2019-2020 P3TERX <https://p3terx.com>
+#
+# This is free software, licensed under the MIT License.
+# See /LICENSE for more information.
+#
+# https://github.com/P3TERX/Actions-OpenWrt
+# Description: Build OpenWrt using GitHub Actions
+#
+name: Build Immortalwrt-ipq6000
+
+on:
+  workflow_dispatch:
+    inputs:
+      ssh:
+        description: 'SSH connection to Actions'
+        required: false
+        default: 'false'
+  schedule:
+    - cron: 0 0 */3 * *
+    
+env:
+  REPO_URL: https://github.com/VIKINGYFY/immortalwrt.git
+  REPO_BRANCH: main
+  FEEDS_CONF: feeds.conf.default
+  CONFIG_FILE: immortalwrt/znm2.config
+  DIY_P1_SH: immortalwrt/diy-part1.sh
+  DIY_ZNM2P2_SH: immortalwrt/znm2-Settings.sh
+  DIY_P2_SH: immortalwrt/diy-part2.sh
+  FREE_DISK_SH: immortalwrt/free_disk_space.sh
+  UPLOAD_FIRMWARE: true
+  UPLOAD_COWTRANSFER: false
+  UPLOAD_WETRANSFER: false
+  UPLOAD_RELEASE: true
+  TZ: Asia/Shanghai
+  DOCKER_BUILD_SH: immortalwrtBulid.sh
+  CACHE_TOOLCHAIN: true
+  FILES: immortalwrt/files
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+
+    steps:
+    - name: 检查项目分支
+      uses: actions/checkout@main
+
+    - name: 安装编译环境
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        chmod +x $FREE_DISK_SH && $FREE_DISK_SH
+        sudo -E apt-get -qq update
+        sudo -E apt-get -qq autoclean
+        sudo -E apt-get -qq autoremove --purge
+        sudo -E apt-get -qq clean
+        sudo apt install -y ack antlr3 asciidoc autoconf automake autopoint binutils bison build-essential \
+        bzip2 ccache cmake cpio curl device-tree-compiler fastjar flex gawk gettext gcc-multilib g++-multilib \
+        git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libfuse-dev libglib2.0-dev libgmp3-dev \
+        libltdl-dev libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libpython3-dev libreadline-dev \
+        libssl-dev libtool lrzsz mkisofs msmtp ninja-build p7zip p7zip-full patch pkgconf python3 \
+        python3-pyelftools python3-setuptools qemu-utils rsync scons squashfs-tools subversion swig texinfo \
+        uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev
+        sudo timedatectl set-timezone "$TZ"
+        sudo mkdir -p /workdir
+        sudo chown $USER:$GROUPS /workdir
+
+
+
+    - name: 克隆固件源码
+      id: clone
+      run: |
+        df -hT $GITHUB_WORKSPACE
+        git clone $REPO_URL -b $REPO_BRANCH openwrt
+        cd openwrt
+        echo "OPENWRT_PATH=$PWD" >> $GITHUB_ENV
+
+
+    - name: 添加外部插件
+      run: |
+        [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
+        chmod +x $DIY_P1_SH
+        cd openwrt
+        $GITHUB_WORKSPACE/$DIY_P1_SH
+        
+
+    - name: 更新外部插件
+      run: cd openwrt && ./scripts/feeds update -a
+
+    - name: Toolchain缓存
+      uses: klever1988/cachewrtbuild@main
+      with:
+        ccache: 'true'
+        mixkey: 'immortalwrt-24.10_ipq6000'
+        prefix: ${{ env.OPENWRT_PATH }}      
+        
+    - name: 安装外部插件
+      run: cd openwrt && ./scripts/feeds install -a
+
+    - name: 加载个人设置
+      run: |
+        [ -e $FILES ] && mv $FILES openwrt/files
+        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+        chmod +x $DIY_P2_SH
+        chmod +x $DIY_ZNM2P2_SH
+        chmod +x $DIY_P1_SH    
+        cd openwrt
+        $GITHUB_WORKSPACE/$DIY_P2_SH
+        $GITHUB_WORKSPACE/$DIY_ZNM2P2_SH
+        $GITHUB_WORKSPACE/$DIY_P1_SH
+
+    - name: SSH connection to Actions
+      uses: P3TERX/ssh2actions@v1.0.0
+      if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
+      env:
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+
+
+    - name: 下载固件dL库
+      id: package
+      run: |
+        cd openwrt
+        make defconfig
+        make download -j8
+        find dl -size -1024c -exec ls -l {} \;
+        find dl -size -1024c -exec rm -f {} \;
+
+    - name: 正在编译固件
+      id: compile
+      run: |
+        cd openwrt
+        echo -e "$(nproc) thread compile"
+        make -j$(nproc) || make -j1 || make -j1 V=s
+        echo "status=success" >> $GITHUB_OUTPUT
+
+        # 提取设备名
+        grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
+
+        if [ -s DEVICE_NAME ]; then
+          DEVICE_NAME=$(cat DEVICE_NAME)
+          # 使用 tr 保留字母、数字、短横线，删除非法字符
+          SAFE_DEVICE_NAME=$(echo "${DEVICE_NAME}" | tr -cd '[:alnum:]-')
+          # 写入 GITHUB_ENV 时必须加引号
+          echo "DEVICE_NAME=\"_${SAFE_DEVICE_NAME}\"" >> $GITHUB_ENV
+        fi
+
+        # 同样为日期加引号
+        echo "FILE_DATE=\"_$(date +"%Y%m%d%H%M")\"" >> $GITHUB_ENV
+
+    - name: 查看磁盘用量
+      if: (!cancelled())
+      run: df -hT
+
+    - name: 整理文件
+      id: organize
+      if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
+      run: |
+        cd openwrt/bin/targets/*/*
+        rm -rf packages
+        rm -rf *.buildinfo
+        rm -rf *.json
+        rm -rf *.manifest
+        echo "FIRMWARE=$PWD" >> $GITHUB_ENV
+        echo "status=success" >> $GITHUB_OUTPUT
+        
+    - name: 上传固件目录
+      uses: actions/upload-artifact@main
+      if: steps.organize.outputs.status == 'success' && !cancelled()
+      with:
+         name: OpenWrt_firmware_${{ env.DEVICE_NAME }}_${{ env.FILE_DATE }}
+         path: ${{ env.FIRMWARE }}
+
+        
+    - name: 创建发布标签
+      id: tag
+      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
+      run: |
+        echo -e "✅ Immortalwrt-24.10-ipq6000 \n" >> release.txt
+        echo "release_tag=$(date +"%Y.%m.%d-%H%M"-Immortalwrt-24.10-ipq6000)" >> $GITHUB_OUTPUT
+        echo "status=success" >> $GITHUB_OUTPUT
+
+    - name: 发布新版固件
+      uses: softprops/action-gh-release@v2
+      if: steps.tag.outputs.status == 'success' && !cancelled()
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.tag.outputs.release_tag }}
+        body_path: release.txt
+        files: ${{ env.FIRMWARE }}/*
+
+    - name: 清理编译流程
+      uses: Mattraks/delete-workflow-runs@main
+      with:
+        retain_days: 0
+        keep_minimum_runs: 1
+
+    - name: 删除旧版固件
+      uses: dev-drprasad/delete-older-releases@master
+      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
+      with:
+        keep_latest: 4
+        delete_tags: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    

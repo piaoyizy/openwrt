@@ -1,0 +1,30 @@
+diff --git a/target/linux/qualcommax/image/ipq60xx.mk b/target/linux/qualcommax/image/ipq60xx.mk
+index abcdef1..1234567 100644
+--- a/target/linux/qualcommax/image/ipq60xx.mk
++++ b/target/linux/qualcommax/image/ipq60xx.mk
+@@ -100,10 +100,10 @@ TARGET_DEVICES += jdcloud_re-ss-01
+
+-define Device/zn_m2
+-	$(call Device/FitImage)
+-	$(call Device/UbiFit)
+-	DEVICE_VENDOR := ZN
+-	DEVICE_MODEL := M2
+-	BLOCKSIZE := 128k
+-	PAGESIZE := 2048
+-	SOC := ipq6000
+-	DEVICE_DTS_CONFIG := config@cp03-c1
+-	DEVICE_PACKAGES := ipq-wifi-zn_m2
+-endef
+-TARGET_DEVICES += zn_m2
++define Device/zn-m2
++	$(call Device/FitImage)
++	$(call Device/UbiFit)
++	DEVICE_VENDOR := ZN
++	DEVICE_MODEL := M2
++	BLOCKSIZE := 128k
++	PAGESIZE := 2048
++	SOC := ipq6000
++	DEVICE_DTS_CONFIG := config@cp03-c1
++	DEVICE_PACKAGES := ipq-wifi-zn-m2
++endef
++TARGET_DEVICES += zn-m2
