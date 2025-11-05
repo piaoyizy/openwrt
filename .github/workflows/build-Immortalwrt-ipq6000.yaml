@@ -134,20 +134,9 @@ jobs:
         echo -e "$(nproc) thread compile"
         make -j$(nproc) || make -j1 || make -j1 V=s
         echo "status=success" >> $GITHUB_OUTPUT
-
-        # 提取设备名
         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
-
-        if [ -s DEVICE_NAME ]; then
-          DEVICE_NAME=$(cat DEVICE_NAME)
-          # 使用 tr 保留字母、数字、短横线，删除非法字符
-          SAFE_DEVICE_NAME=$(echo "${DEVICE_NAME}" | tr -cd '[:alnum:]-')
-          # 写入 GITHUB_ENV 时必须加引号
-          echo "DEVICE_NAME=\"_${SAFE_DEVICE_NAME}\"" >> $GITHUB_ENV
-        fi
-
-        # 同样为日期加引号
-        echo "FILE_DATE=\"_$(date +"%Y%m%d%H%M")\"" >> $GITHUB_ENV
+        [ -s DEVICE_NAME ] && echo "DEVICE_NAME=_$(cat DEVICE_NAME)" >> $GITHUB_ENV
+        echo "FILE_DATE=_$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
 
     - name: 查看磁盘用量
       if: (!cancelled())
