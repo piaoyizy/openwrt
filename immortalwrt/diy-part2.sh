@@ -23,8 +23,8 @@ git clone https://github.com/sbwml/packages_lang_golang -b 25.x feeds/packages/l
 
 rm -rf package/feeds/luci/luci-app-passwall/
 rm -rf feeds/packages/net/{xray-core,v2ray-core,v2ray-geodata,sing-box,chinadns-ng}
-git clone https://github.com/xiaorouji/openwrt-passwall-packages.git package/openwrt-passwall
-git clone https://github.com/xiaorouji/openwrt-passwall.git package/passwall
+git clone https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git package/openwrt-passwall
+git clone https://github.com/Openwrt-Passwall/openwrt-passwall.git package/passwall
 git clone https://github.com/nikkinikki-org/OpenWrt-momo.git package/OpenWrt-momo
 
 
