@@ -109,13 +109,18 @@ jobs:
       env:
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        
     - name: Disable Rust CI LLVM download
       working-directory: ./openwrt
       run: |
-        sed -i 's/--set=llvm\.download-ci-llvm=true/--set=llvm.download-ci-llvm=false/' \
-          feeds/packages/lang/rust/Makefile
-        grep -q -- '--set=llvm.download-ci-llvm=false' \
-          feeds/packages/lang/rust/Makefile
+        # 通过环境变量强制禁用
+        export RUST_BOOTSTRAP_DOWNLOAD_CI_LLVM=false
+        export RUSTFLAGS_BOOTSTRAP="-C target-feature=-crt-static"
+    
+        # 添加到 Makefile
+        echo "" >> feeds/packages/lang/rust/Makefile
+        echo "CONFIGURE_ARGS += --set=llvm.download-ci-llvm=false" >> feeds/packages/lang/rust/Makefile
+        grep "download-ci-llvm" feeds/packages/lang/rust/Makefile
 
     - name: 下载固件dL库
       id: package
